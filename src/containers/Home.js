@@ -1,11 +1,12 @@
 import React from "react";
-import { View, ActivityIndicator, Text, FlatList, Linking, Platform, Image, TouchableOpacity, TextInput } from 'react-native'
+import { View, ActivityIndicator, Text, FlatList, Platform, Image, TouchableOpacity, TextInput } from 'react-native'
 import { createExample } from "../actions/Example";
 import { connect } from "react-redux";
 import styles from '../style/homeStyle';
 import { Icon } from 'react-native-elements';
 import renderArticle from "../component/article";
 import filterForUniqueArticles from "../component/filter";
+import WeatherStatus from "../component/WeatherStatus";
 
 class Home extends React.Component {
   constructor(props) {
@@ -123,6 +124,7 @@ class Home extends React.Component {
           onEndReached={this.getNews}
           onEndReachedThreshold={1}
           extraData={this.state.listArc}
+          ListHeaderComponent={<View><WeatherStatus /></View>}
           ListFooterComponent={this.state.lastPageReached ?
             <Text style={styles.end}>{this.state.listArc.length == 0 ? 'No results for ' + this.state.searchLine : 'No more articles'}</Text> :
             <ActivityIndicator size="large" loading={this.setState.isLoading} />} />
